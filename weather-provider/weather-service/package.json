@@ -1,0 +1,23 @@
+{
+  "name": "weather-service",
+  "version": "1.0.0",
+  "description": "A NodeJS based javascript service providing weather related data.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "keywords": [],
+  "author": "Aron Sipos",
+  "license": "ISC",
+  "dependencies": {
+    "boom": "^7.3.0",
+    "hapi": "^18.1.0",
+    "hapi-routes": "^5.0.2",
+    "joi": "^14.3.1",
+    "mongoose": "^5.5.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.11"
+  }
+}
