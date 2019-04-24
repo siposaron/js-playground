@@ -3,11 +3,14 @@
 const Boom = require('boom');  
 const Joi = require('joi');
 const UserModel = require('../models/User');
+const Authorizer = require('../auth/Authorizer');
+
 
 const routes = [{
     method: 'POST',
     path: '/api/token',
     options: {
+        auth: false,
         validate: {
             payload: {
                 email: Joi.string().email({ minDomainAtoms: 2 }).required(),
@@ -21,18 +24,16 @@ const routes = [{
     handler: async (request, h) => {
         try {
             const user = await UserModel.findOne({
-                email: request.payload.email
+                email: request.payload.email,
+                password: request.payload.password
             }).exec();
 
             if (user) {
-                // GENERATE JWT token
                 const result = {};
-                result.token = "TOKEN" + user.id + user.email + user.name;
+                result.token = await Authorizer.generateToken(user.toObject());
                 return h.response(result);
             }
-
             throw Boom.badRequest('User not found.');
-
         } catch (error) {
             throw Boom.badImplementation('Error while creating token.', error);
         }

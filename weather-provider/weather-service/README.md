@@ -1,5 +1,5 @@
 # Weather Provider
-A NodeJS based javascript service providing weather related data.
+A NodeJS based javascript service providing weather related data based on location.
 
 ## Tech stack
 NodeJS, Hapi, Mongoose, MongoDB
