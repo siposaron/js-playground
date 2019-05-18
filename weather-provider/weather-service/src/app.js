@@ -2,7 +2,7 @@
 
 const Hapi = require('hapi');
 const Mongoose = require('mongoose');
-const Authorizer = require('./auth/Authorizer');
+const Authorizer = require('./auth/authorizer');
 const Config = require('./config/config');
 
 // Create a server with a host and port
