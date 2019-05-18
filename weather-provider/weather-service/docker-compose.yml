@@ -8,6 +8,7 @@ services:
       - HOST=weather-service
       - PORT=3000
       - MONGODB_URI=mongodb://mongo/weather-service
+      - SECRET_KEY=s3cr3t
     restart: always 
     depends_on: 
       - mongo  

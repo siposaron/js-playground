@@ -2,8 +2,8 @@
 
 const Boom = require('boom');  
 const Joi = require('joi');
-const WeatherModel = require('../models/Weather');
-const Authorizer = require('../auth/Authorizer');
+const WeatherModel = require('../models/weather');
+const Authorizer = require('../auth/authorizer');
 
 const checkLocation = async function(userId, location) {
     const weatherLocation = await WeatherModel.findOne({

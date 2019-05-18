@@ -2,8 +2,8 @@
 
 const Joi = require('joi');
 const Boom = require('boom');  
-const UserModel = require('../models/User');
-const Authorizer = require('../auth/Authorizer');
+const UserModel = require('../models/user');
+const Authorizer = require('../auth/authorizer');
 
 const hasPermission = async function(request) {
     const userId = await Authorizer.getUserId(request.headers.authorization);

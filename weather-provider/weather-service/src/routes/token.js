@@ -2,8 +2,8 @@
 
 const Boom = require('boom');  
 const Joi = require('joi');
-const UserModel = require('../models/User');
-const Authorizer = require('../auth/Authorizer');
+const UserModel = require('../models/user');
+const Authorizer = require('../auth/authorizer');
 
 
 const routes = [{
