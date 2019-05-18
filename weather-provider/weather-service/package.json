@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js"
+    "start-local": "HOST=localhost MONGODB_URI=mongodb://localhost:27017/weather-service nodemon ./src/app.js"
   },
   "keywords": [],
   "author": "Aron Sipos",
@@ -13,9 +13,11 @@
   "dependencies": {
     "boom": "^7.3.0",
     "hapi": "^18.1.0",
+    "hapi-auth-jwt2": "^8.4.0",
     "hapi-routes": "^5.0.2",
     "joi": "^14.3.1",
-    "mongoose": "^5.5.0"
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.5.4"
   },
   "devDependencies": {
     "nodemon": "^1.18.11"

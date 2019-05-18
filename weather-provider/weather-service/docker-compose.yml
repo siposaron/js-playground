@@ -1,0 +1,24 @@
+version: '3'
+services:
+  weather-service:
+    build: .
+    ports:
+      - 3000:3000
+    environment:
+      - HOST=weather-service
+      - PORT=3000
+      - MONGODB_URI=mongodb://mongo/weather-service
+      - SECRET_KEY=s3cr3t
+    restart: always 
+    depends_on: 
+      - mongo  
+  mongo:
+    image: "mongo:latest"
+    ports:
+      - 37017:27017
+    volumes:
+      - mongo-config:/data/configdb
+      - ~/Dev/Data/mongo-ws:/data/db
+volumes:
+#     mongo-data:
+  mongo-config:

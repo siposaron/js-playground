@@ -2,7 +2,18 @@
 
 const Boom = require('boom');  
 const Joi = require('joi');
-const WeatherModel = require('../models/Weather');
+const WeatherModel = require('../models/weather');
+const Authorizer = require('../auth/authorizer');
+
+const checkLocation = async function(userId, location) {
+    const weatherLocation = await WeatherModel.findOne({
+        location: location,
+        user: userId
+    }).exec();
+    if (weatherLocation) {
+        throw Boom.badImplementation('Location already exists!');
+    }
+}
 
 const routes = [
     {
@@ -11,7 +22,6 @@ const routes = [
         options: {
             validate: {
                 payload: {
-                    user: Joi.string().required(),
                     location: Joi.string().required(),
                     temperature: Joi.number().required(),
                     humidity: Joi.number().required()
@@ -23,7 +33,12 @@ const routes = [
         },
         handler: async (request, h) => {
             try {
-                const weather = new WeatherModel(request.payload);
+                const userId = await Authorizer.getUserId(request.headers.authorization);
+                const weatherDto = request.payload;
+                weatherDto.user = userId;
+                // check if location already exists
+                await checkLocation(userId, request.payload.location);
+                const weather = new WeatherModel(weatherDto);
                 const result = await weather.save();
                 return h.response(result);
             } catch (error) {
@@ -36,11 +51,13 @@ const routes = [
         path: '/api/weather',
         handler: async (request, h) => {
             try {
+                const userId = await Authorizer.getUserId(request.headers.authorization);
                 const result = request.query.location 
                     ? await WeatherModel.find({
-                            location: request.query.location
+                            location: request.query.location,
+                            user: userId
                         }).exec()
-                    : await WeatherModel.find().exec();
+                    : await WeatherModel.find({user: userId}).exec();
                 return h.response(result);
             } catch (error) {
                 throw Boom.badImplementation('Error while fetching weather.', error);
@@ -52,7 +69,11 @@ const routes = [
         path: '/api/weather/{id}',
         handler: async (request, h) => {
             try {
-                const result = await WeatherModel.findById(request.params.id).exec();
+                const userId = await Authorizer.getUserId(request.headers.authorization);
+                const result = await WeatherModel.findOne({
+                    _id: request.params.id,
+                    user: userId
+                }).exec();
                 return h.response(result);
             } catch (error) {
                 throw Boom.badImplementation('Error while fetching weather.', error);
@@ -76,7 +97,17 @@ const routes = [
         },
         handler: async (request, h) => {
             try {
-                const result = await WeatherModel.findByIdAndUpdate(request.params.id, request.payload, {new: true}).exec();
+                const userId = await Authorizer.getUserId(request.headers.authorization);
+                // check if location already exists
+                await checkLocation(request.payload.location);
+                const result = await WeatherModel.findOneAndUpdate(
+                    {
+                        _id: request.params.id, 
+                        user: userId
+                    },
+                    request.payload, 
+                    {new: true}
+                ).exec();
                 return h.response(result);
             } catch (error) {
                 throw Boom.badImplementation('Error while updating weather.', error);
@@ -88,7 +119,11 @@ const routes = [
         path: '/api/weather/{id}',
         handler: async (request, h) => {
             try {
-                await WeatherModel.findByIdAndDelete(request.params.id).exec();
+                const userId = await Authorizer.getUserId(request.headers.authorization);
+                await WeatherModel.findOneAndDelete({
+                    _id: request.params.id,
+                    user: userId
+                }).exec();
                 return h.response().code(204);
             } catch (error) {
                 throw Boom.badImplementation('Error while deleting weather.', error);
