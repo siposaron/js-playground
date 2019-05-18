@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js"
+    "start-local": "nodemon ./src/app.js"
   },
   "keywords": [],
   "author": "Aron Sipos",
@@ -17,7 +17,7 @@
     "hapi-routes": "^5.0.2",
     "joi": "^14.3.1",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.5.0"
+    "mongoose": "^5.5.4"
   },
   "devDependencies": {
     "nodemon": "^1.18.11"

@@ -27,3 +27,6 @@ Weather:
 * GET /api/weather?location={city}
 * GET /api/weather/{id}
 * DELETE /api/weather/{id}
+
+
+curl -X POST -H "Content-type: application/json" http://localhost:3000/api/users -d '{"name":"Tony Scott","email": "tony@scott.ant","password": "tonyPASS"}'
