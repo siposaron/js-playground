@@ -1,7 +1,7 @@
 FROM mhart/alpine-node:latest
 
-# Install bash
-RUN apk add --update bash && rm -rf /var/cache/apk/* && apk add curl
+# Install bash and curl
+RUN apk add --update bash && apk add curl && rm -rf /var/cache/apk/*
 
 # Create app directory
 RUN mkdir -p /usr/src/app

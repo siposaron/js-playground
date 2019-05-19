@@ -2,7 +2,7 @@
 A NodeJS based javascript service providing weather related data based on location.
 
 ## Tech stack
-NodeJS, Hapi, Mongoose, MongoDB
+NodeJS, Hapi 18, Mongoose, MongoDB
 
 ## REST endpoints
 
@@ -28,5 +28,23 @@ Weather:
 * GET /api/weather/{id}
 * DELETE /api/weather/{id}
 
+## Start the server
+### Quick start
+`npm run start-local`
 
-curl -X POST -H "Content-type: application/json" http://localhost:3000/api/users -d '{"name":"Tony Scott","email": "tony@scott.ant","password": "tonyPASS"}'
+### With environmental variables
+| Name | Value |
+| --- | --- |
+| HOST | localhost |
+| PORT | 3000 |
+| MONGODB_URI | mongodb://localhost:27017/weather-service |
+| SECRET_KEY | s3cr3t |
+
+`HOST=localhost PORT=3000 MONGODB_URI=mongodb://localhost:27017/weather-service SECRET_KEY=s3cr3t node ./src/app.js`
+
+## Register a user via CURL
+
+`curl -X POST -H "Content-type: application/json" http://localhost:3000/api/users -d '{"name":"Scott Lang","email": "scott@lang.ant","password": "antman"}'`
+
+## Step by step guide
+See the [technical readme](README_TECH.md) for a step by step guide.

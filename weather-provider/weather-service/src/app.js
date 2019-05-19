@@ -8,7 +8,10 @@ const Config = require('./config/config');
 // Create a server with a host and port
 const server = new Hapi.Server({  
     host: Config.HOST,
-    port: Config.PORT
+    port: Config.PORT,
+    routes: {
+        cors: true
+    }
 });  
 
 // Mongo DB connection
@@ -44,7 +47,7 @@ async function start() {
                 // routes plugin: fetch route files from directory
                 plugin: require('hapi-routes'),
                 options: {
-                    dir: `${__dirname}/routes/*`,
+                    dir: `${__dirname}/routes/*`
                 }
             }
         ]);

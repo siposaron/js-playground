@@ -1,0 +1,420 @@
+{
+	"info": {
+		"_postman_id": "db80e4a3-f680-46ec-8f34-e8c9b8fe25e5",
+		"name": "uflow-js-weather",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "add user",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Aron\",\n\t\"email\": \"aron@aron.uf\",\n\t\"password\": \"AronPASS\"\n}"
+				},
+				"url": {
+					"raw": "{{js_host}}/api/users",
+					"host": [
+						"{{js_host}}"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "52b806b5-17aa-4a21-bf75-c876be5b7391",
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.environment.set(\"js_token\", jsonData.token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"aron@aron.aa\",\n\t\"password\": \"AronPASS\"\n}\n"
+				},
+				"url": {
+					"raw": "{{js_host}}/api/token",
+					"host": [
+						"{{js_host}}"
+					],
+					"path": [
+						"api",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get users",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{js_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{js_host}}/api/users",
+					"host": [
+						"{{js_host}}"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get user by id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{js_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{js_host}}/api/users/5cc076c429a6bf2840eec41a",
+					"host": [
+						"{{js_host}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"5cc076c429a6bf2840eec41a"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update user",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{js_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Aron2\"\n}"
+				},
+				"url": {
+					"raw": "{{js_host}}/api/users/5cc076c429a6bf2840eec41a",
+					"host": [
+						"{{js_host}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"5cc076c429a6bf2840eec41a"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete user",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{js_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Aron\",\n\t\"email\": \"Aron@aron.aa\",\n\t\"password\": \"AronPASS\"\n}"
+				},
+				"url": {
+					"raw": "{{js_host}}/api/users/5cad12bb8809350399b3e12d",
+					"host": [
+						"{{js_host}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"5cad12bb8809350399b3e12d"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add weather",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{js_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"location\": \"Kolozsvar\",\n\t\"temperature\": 24,\n\t\"humidity\": 61\n}"
+				},
+				"url": {
+					"raw": "{{js_host}}/api/weather",
+					"host": [
+						"{{js_host}}"
+					],
+					"path": [
+						"api",
+						"weather"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get weather with location query",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{js_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{js_host}}/api/weather?location=Kolozsvar",
+					"host": [
+						"{{js_host}}"
+					],
+					"path": [
+						"api",
+						"weather"
+					],
+					"query": [
+						{
+							"key": "location",
+							"value": "Kolozsvar"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get weathers",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{js_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{js_host}}/api/weather",
+					"host": [
+						"{{js_host}}"
+					],
+					"path": [
+						"api",
+						"weather"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update weather",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{js_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"location\": \"Kolozsvar\",\n\t\"temperature\": 20,\n\t\"humidity\": 46\n}"
+				},
+				"url": {
+					"raw": "{{js_host}}/api/weather/5cc078c04f07d829435ff861",
+					"host": [
+						"{{js_host}}"
+					],
+					"path": [
+						"api",
+						"weather",
+						"5cc078c04f07d829435ff861"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete weather",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{js_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"location\": \"Krakow\",\n\t\"temperature\": 14,\n\t\"humidity\": 46\n}"
+				},
+				"url": {
+					"raw": "{{js_host}}/api/weather/5cc078c04f07d829435ff861",
+					"host": [
+						"{{js_host}}"
+					],
+					"path": [
+						"api",
+						"weather",
+						"5cc078c04f07d829435ff861"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
