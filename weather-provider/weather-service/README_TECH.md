@@ -7,7 +7,13 @@
 
 Add a start server entry under package.json#scripts
 
+`"start-local": "nodemon ./src/app.js"`
+
+
+Later on we can specify environmental variables for startup i.e. 
+
 `"start-local": "HOST=localhost MONGODB_URI=mongodb://localhost:27017/weather-service nodemon ./src/app.js"`
+
 
 # Project structure
 Create an `src` subfolder, it will store all the js source files and source subfolders.
@@ -77,19 +83,19 @@ module.exports = Mongoose.model("weather", {
 ```
 
 ## General Mongoose queries
+* `MODEL.save()`
+* `MODEL.find().exec()`
+* `MODEL.findOne({}).exec()`
+* `MODEL.findById(id).exec()`
+* `MODEL.findByIdAndUpdate(id, {}, {new: true}).exec()`
+* `MODEL.findByIdAndDelete(id).exec()`
 
-`MODEL.save()`
-
-`MODEL.find().exec()`
-
-`MODEL.findOne({}).exec()`
-
-`MODEL.findById(id).exec()`
-
-`MODEL.findByIdAndUpdate(id, {}, {new: true}).exec()`
-
-`MODEL.findByIdAndDelete(id).exec()`
-
+## Accessing request parameters and body
+* Header parameter: `request.headers.param_name`
+* Path parameter: `request.params.param_name`
+* Query string parameter: `request.query.param_name`
+* Request body: `request.payload`
+* Request body parameter: `request.payload.param_name`
 
 ## Create the users route (rest endpoint)
 `src/routes/users.js`
@@ -148,17 +154,6 @@ exports.routes = server => server.route(routes);
 ```
 
 > Write endpoint methods for UPDATE, GET by id.
-
-## Accessing request parameters and body
-Header parameter: `request.headers.param_name`
-
-Path parameter: `request.params.param_name`
-
-Query string parameter: `request.query.param_name`
-
-Request body: `request.payload`
-
-Request body parameter: `request.payload.param_name`
 
 ## Add mongo config to app.js
 Add the lines below above the `async function start()` in app.js
