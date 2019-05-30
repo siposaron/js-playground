@@ -10,12 +10,12 @@ NodeJS, Hapi 18, Mongoose, MongoDB
 Anyone can access wihout a valid token.
 
 * POST /api/token
+* POST /api/users
 
 ### Private endpoints
 The request must contain a bearer JWT token.
 
 Users:
-* POST /api/users
 * PUT /api/users/{id}
 * GET /api/users
 * GET /api/users/{id}
