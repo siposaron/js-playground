@@ -59,7 +59,7 @@ async function start() {
 
 start();
 ```
-Run `npm start-local` from project root folder.
+Run `npm run start-local` from project root folder.
 
 ## Create the mongo models with mongoose
 Create the file `/src/models/user.js`
