@@ -28,7 +28,8 @@ curl --location --request POST 'http://localhost:3000/generate' \
     "lastName": "Bar",
     "first": "First text",
     "second": "Second text",
-    "LAST": "Very important\ntext here!"
+    "LAST": "Very important\ntext here!",
+    "images": ["pexels-going-to-the-river.jpg", "pexels-helloaesthe.jpg", "pexels-hellojoshwithers.jpg"]
   }'
 ```
 

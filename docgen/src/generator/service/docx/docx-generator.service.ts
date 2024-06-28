@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import * as fs from 'fs';
-import { TemplateHandler } from 'easy-template-x';
+import { MimeType, TemplateHandler } from 'easy-template-x';
 
 @Injectable()
 export class DocxGeneratorService {
@@ -21,6 +21,20 @@ export class DocxGeneratorService {
     const tags = await this.handler.parseTags(templateFile);
     const tagNames = this.removeDuplicates(tags.map((t) => t.name));
     console.log(`Tag names: ${tagNames}`);
+
+    // images if exist
+    if (contentValues.images) {
+      for (let i = 0; i < contentValues.images.length; i++) {
+        const index = i + 1;
+        contentValues[`img${index}`] = {
+          _type: 'image',
+          source: fs.readFileSync(`./templates/img/${contentValues.images[i]}`),
+          format: MimeType.Jpeg,
+          width: 600,
+          height: 800,
+        };
+      }
+    }
 
     // 3. process the template
     const doc = await this.handler.process(templateFile, contentValues);
